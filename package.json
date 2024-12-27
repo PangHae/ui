@@ -11,13 +11,16 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@types/lodash-es": "^4.17.12",
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.1.0",
     "axios": "^1.7.9",
     "clsx": "^2.1.1",
+    "lodash-es": "^4.17.21",
     "next": "15.1.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
     "sass": "^1.83.0"
   },
   "devDependencies": {
