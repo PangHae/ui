@@ -5,6 +5,7 @@ import { useState } from 'react';
 import qs from 'qs';
 import { useForm } from 'react-hook-form';
 
+import Input from '@/components/base/Input';
 import { apiClient } from '@/util/apiClient';
 
 type HttpMethod = 'GET' | 'POST' | 'DELETE' | 'UPDATE';
@@ -50,20 +51,20 @@ export default function ApiTester() {
     <div>
       <h1>API Tester</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input
+        <Input
           type="text"
           {...register('url')}
-          placeholder="API URL"
+          placeholder="API URL (e.g. /dok/example)"
           required
         />
         <fieldset>
           <legend>HTTP 메소드 선택</legend>
           <div>
-            <input type="radio" id="get" value="GET" {...register('method')} />
+            <Input type="radio" id="get" value="GET" {...register('method')} />
             <label htmlFor="get">GET</label>
           </div>
           <div>
-            <input
+            <Input
               type="radio"
               id="post"
               value="POST"
@@ -72,11 +73,11 @@ export default function ApiTester() {
             <label htmlFor="post">POST</label>
           </div>
           <div>
-            <input type="radio" id="put" value="PUT" {...register('method')} />
+            <Input type="radio" id="put" value="PUT" {...register('method')} />
             <label htmlFor="put">PUT</label>
           </div>
           <div>
-            <input
+            <Input
               type="radio"
               id="delete"
               value="DELETE"
@@ -85,9 +86,9 @@ export default function ApiTester() {
             <label htmlFor="delete">DELETE</label>
           </div>
         </fieldset>
-        <input
+        <Input
           type="text"
-          placeholder="Query params (e.g. /param1=value1&param2=value2)"
+          placeholder="Query params (e.g. ?param1=value1&param2=value2)"
           {...register('queryParams')}
         />
         <textarea
@@ -97,7 +98,7 @@ export default function ApiTester() {
         <button type="submit">Send Request</button>
       </form>
       {response && (
-        <div className="mt-8">
+        <div>
           <h2>Response:</h2>
           <pre>{JSON.stringify(response, null, 2)}</pre>
         </div>
