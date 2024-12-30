@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import qs from 'qs';
 import { useForm } from 'react-hook-form';
 
 import { apiClient } from '@/util/apiClient';
@@ -27,8 +28,22 @@ export default function ApiTester() {
   const [response, setResponse] = useState(null);
 
   const onSubmit = async (data: APITest) => {
-    const result = await apiClient.get(data.url);
-    setResponse(result.data);
+    const queryObject = qs.parse(
+      qs.stringify(
+        Object.fromEntries(
+          Object.entries(data).filter(([, value]) => value !== ''),
+        ),
+      ),
+    );
+
+    try {
+      const result = await apiClient.get('/test', {
+        params: queryObject,
+      });
+      setResponse(result.data);
+    } catch (error) {
+      console.error('Error가 발생했습니다.', error);
+    }
   };
 
   return (
@@ -72,7 +87,7 @@ export default function ApiTester() {
         </fieldset>
         <input
           type="text"
-          placeholder="Query params (e.g. param1=value1&param2=value2)"
+          placeholder="Query params (e.g. /param1=value1&param2=value2)"
           {...register('queryParams')}
         />
         <textarea
