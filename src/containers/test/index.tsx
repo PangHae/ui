@@ -8,6 +8,8 @@ import { useForm } from 'react-hook-form';
 import Input from '@/components/base/Input';
 import { apiClient } from '@/util/apiClient';
 
+import styles from './test.module.scss';
+
 type HttpMethod = 'GET' | 'POST' | 'DELETE' | 'UPDATE';
 
 type APITest = {
@@ -48,22 +50,22 @@ export default function ApiTester() {
   };
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <h1>API Tester</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.testForm} onSubmit={handleSubmit(onSubmit)}>
         <Input
           type="text"
           {...register('url')}
           placeholder="API URL (e.g. /dok/example)"
           required
         />
-        <fieldset>
+        <fieldset className={styles.method}>
           <legend>HTTP 메소드 선택</legend>
-          <div>
+          <div className={styles.radioWrapper}>
             <Input type="radio" id="get" value="GET" {...register('method')} />
             <label htmlFor="get">GET</label>
           </div>
-          <div>
+          <div className={styles.radioWrapper}>
             <Input
               type="radio"
               id="post"
@@ -72,11 +74,11 @@ export default function ApiTester() {
             />
             <label htmlFor="post">POST</label>
           </div>
-          <div>
+          <div className={styles.radioWrapper}>
             <Input type="radio" id="put" value="PUT" {...register('method')} />
             <label htmlFor="put">PUT</label>
           </div>
-          <div>
+          <div className={styles.radioWrapper}>
             <Input
               type="radio"
               id="delete"

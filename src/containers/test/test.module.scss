@@ -1,0 +1,29 @@
+@use 'constants/colors' as c;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+
+  .testForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .method {
+      display: flex;
+      gap: 25px;
+      padding: 12px;
+      border: 1px solid c.$COLOR_GRAY_40;
+      border-radius: 8px;
+
+      .radioWrapper {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

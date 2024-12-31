@@ -12,6 +12,26 @@
   border: 1px solid c.$COLOR_GRAY_40;
   border-radius: 8px;
 
+  &[type='radio'] {
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    vertical-align: middle;
+    appearance: none;
+    cursor: pointer;
+    border: 1px solid c.$COLOR_GRAY_40;
+    border-radius: 50%;
+
+    &:checked {
+      border: 0.35rem solid c.$COLOR_MAIN_4;
+      outline: none;
+    }
+
+    &:hover:active {
+      outline: none;
+    }
+  }
+
   &:focus {
     outline: 1px solid c.$COLOR_MAIN_4;
   }
