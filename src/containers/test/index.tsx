@@ -5,6 +5,7 @@ import { useState } from 'react';
 import qs from 'qs';
 import { useForm } from 'react-hook-form';
 
+import Button from '@/components/base/Button';
 import Input from '@/components/base/Input';
 import { apiClient } from '@/util/apiClient';
 
@@ -97,7 +98,9 @@ export default function ApiTester() {
           placeholder="Request body (JSON)"
           {...register('requestBody')}
         />
-        <button type="submit">Send Request</button>
+        <Button type="submit" className="secondary" width="100%" height="32px">
+          Send Request
+        </Button>
       </form>
       {response && (
         <div>
