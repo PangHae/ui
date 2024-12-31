@@ -1,4 +1,8 @@
+'use client';
+
 import OAuthButton from '@/components/base/OAuthButton';
+
+import styles from './login.module.scss';
 
 const Login = () => {
   const handleClickOauth = async (type: 'kakao' | 'google' | 'naver') => {
@@ -9,7 +13,7 @@ const Login = () => {
   };
 
   return (
-    <menu>
+    <menu className={styles.socialLogin}>
       <li>
         <OAuthButton
           companyName="kakao"
