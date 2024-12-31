@@ -2,9 +2,14 @@
 
 import { useState } from 'react';
 
+import qs from 'qs';
 import { useForm } from 'react-hook-form';
 
+import Button from '@/components/base/Button';
+import Input from '@/components/base/Input';
 import { apiClient } from '@/util/apiClient';
+
+import styles from './test.module.scss';
 
 type HttpMethod = 'GET' | 'POST' | 'DELETE' | 'UPDATE';
 
@@ -27,28 +32,42 @@ export default function ApiTester() {
   const [response, setResponse] = useState(null);
 
   const onSubmit = async (data: APITest) => {
-    const result = await apiClient.get(data.url);
-    setResponse(result.data);
+    const queryObject = qs.parse(
+      qs.stringify(
+        Object.fromEntries(
+          Object.entries(data).filter(([, value]) => value !== ''),
+        ),
+      ),
+    );
+
+    try {
+      const result = await apiClient.get('/test', {
+        params: queryObject,
+      });
+      setResponse(result.data);
+    } catch (error) {
+      console.error('Error가 발생했습니다.', error);
+    }
   };
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <h1>API Tester</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
+      <form className={styles.testForm} onSubmit={handleSubmit(onSubmit)}>
+        <Input
           type="text"
           {...register('url')}
-          placeholder="API URL"
+          placeholder="API URL (e.g. /dok/example)"
           required
         />
-        <fieldset>
+        <fieldset className={styles.method}>
           <legend>HTTP 메소드 선택</legend>
-          <div>
-            <input type="radio" id="get" value="GET" {...register('method')} />
+          <div className={styles.radioWrapper}>
+            <Input type="radio" id="get" value="GET" {...register('method')} />
             <label htmlFor="get">GET</label>
           </div>
-          <div>
-            <input
+          <div className={styles.radioWrapper}>
+            <Input
               type="radio"
               id="post"
               value="POST"
@@ -56,12 +75,12 @@ export default function ApiTester() {
             />
             <label htmlFor="post">POST</label>
           </div>
-          <div>
-            <input type="radio" id="put" value="PUT" {...register('method')} />
+          <div className={styles.radioWrapper}>
+            <Input type="radio" id="put" value="PUT" {...register('method')} />
             <label htmlFor="put">PUT</label>
           </div>
-          <div>
-            <input
+          <div className={styles.radioWrapper}>
+            <Input
               type="radio"
               id="delete"
               value="DELETE"
@@ -70,19 +89,21 @@ export default function ApiTester() {
             <label htmlFor="delete">DELETE</label>
           </div>
         </fieldset>
-        <input
+        <Input
           type="text"
-          placeholder="Query params (e.g. param1=value1&param2=value2)"
+          placeholder="Query params (e.g. ?param1=value1&param2=value2)"
           {...register('queryParams')}
         />
         <textarea
           placeholder="Request body (JSON)"
           {...register('requestBody')}
         />
-        <button type="submit">Send Request</button>
+        <Button type="submit" className="secondary" width="100%" height="32px">
+          Send Request
+        </Button>
       </form>
       {response && (
-        <div className="mt-8">
+        <div>
           <h2>Response:</h2>
           <pre>{JSON.stringify(response, null, 2)}</pre>
         </div>

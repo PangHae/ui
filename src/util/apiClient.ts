@@ -3,7 +3,7 @@ import axios from 'axios';
 import { keysToCamel } from './convert';
 
 export const apiClient = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_API_LOCAL_URL}/api`,
+  baseURL: process.env.NEXT_PUBLIC_API_LOCAL_URL,
 });
 
 export const fetchClient = axios.create({
