@@ -53,6 +53,7 @@ export default function ApiTester() {
   return (
     <div className={styles.wrapper}>
       <h1>API Tester</h1>
+      <h2>Origin : {process.env.NEXT_PUBLIC_API_BASE_URL}</h2>
       <form className={styles.testForm} onSubmit={handleSubmit(onSubmit)}>
         <Input
           type="text"
