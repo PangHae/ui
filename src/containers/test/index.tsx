@@ -41,7 +41,7 @@ export default function ApiTester() {
     );
 
     try {
-      const result = await apiClient.get('/test', {
+      const result = await apiClient.get('/api/test', {
         params: queryObject,
       });
       setResponse(result.data);
