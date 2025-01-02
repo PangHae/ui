@@ -1,0 +1,33 @@
+@use 'constants/colors' as c;
+
+.oauthButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 46px;
+  color: c.$COLOR_BLACK;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.icon {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+}
+
+.kakao {
+  background: rgb(255 230 0 / 100%);
+}
+
+.naver {
+  color: c.$COLOR_WHITE;
+  background: rgb(0 199 60 / 100%);
+}
+
+.google {
+  background: c.$COLOR_WHITE;
+  border: 1px solid rgb(131 138 154 / 100%);
+}

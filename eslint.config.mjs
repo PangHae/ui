@@ -18,6 +18,16 @@ const eslintConfig = [
     ignores: ['node_modules/', 'dist/'],
   },
   {
+    settings: {
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: './tsconfig.json',
+        },
+      },
+    },
+  },
+  {
     rules: {
       'react/react-in-jsx-scope': 'off',
       'import/order': [
