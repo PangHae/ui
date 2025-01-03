@@ -11,7 +11,7 @@ import { apiClient } from '@/util/apiClient';
 
 import styles from './test.module.scss';
 
-type HttpMethod = 'GET' | 'POST' | 'DELETE' | 'UPDATE';
+type HttpMethod = 'GET' | 'POST' | 'DELETE' | 'PATCH';
 
 type APITest = {
   url: string;
@@ -32,21 +32,68 @@ export default function ApiTester() {
   const [response, setResponse] = useState(null);
 
   const onSubmit = async (data: APITest) => {
-    const queryObject = qs.parse(
-      qs.stringify(
-        Object.fromEntries(
-          Object.entries(data).filter(([, value]) => value !== ''),
-        ),
-      ),
-    );
+    console.log(data);
+    switch (data.method) {
+      case 'GET':
+        try {
+          const queryObject = qs.parse(
+            qs.stringify(
+              Object.fromEntries(
+                Object.entries(data).filter(([, value]) => value !== ''),
+              ),
+            ),
+          );
 
-    try {
-      const result = await apiClient.get('/api/test', {
-        params: queryObject,
-      });
-      setResponse(result.data);
-    } catch (error) {
-      console.error('Error가 발생했습니다.', error);
+          const result = await apiClient.get('/api/test', {
+            params: queryObject,
+          });
+          setResponse(result.data);
+        } catch (error) {
+          console.error('GET Error가 발생했습니다.', error);
+        }
+        break;
+      case 'POST':
+        try {
+          const result = await apiClient.post('/api/test', data.requestBody, {
+            params: {
+              url: data.url,
+            },
+          });
+          setResponse(result.data);
+        } catch (error) {
+          console.error('POST Error가 발생했습니다.', error);
+        }
+        break;
+      case 'PATCH':
+        try {
+          const result = await apiClient.patch('/api/test', data.requestBody, {
+            params: {
+              url: data.url,
+            },
+          });
+          setResponse(result.data);
+        } catch (error) {
+          console.error('PATCH Error가 발생했습니다.', error);
+        }
+        break;
+      case 'DELETE':
+        try {
+          const queryObject = qs.parse(
+            qs.stringify(
+              Object.fromEntries(
+                Object.entries(data).filter(([, value]) => value !== ''),
+              ),
+            ),
+          );
+
+          const result = await apiClient.delete('/api/test', {
+            params: queryObject,
+          });
+          setResponse(result.data);
+        } catch (error) {
+          console.error('DELETE Error가 발생했습니다.', error);
+        }
+        break;
     }
   };
 
@@ -77,8 +124,13 @@ export default function ApiTester() {
             <label htmlFor="post">POST</label>
           </div>
           <div className={styles.radioWrapper}>
-            <Input type="radio" id="put" value="PUT" {...register('method')} />
-            <label htmlFor="put">PUT</label>
+            <Input
+              type="radio"
+              id="patch"
+              value="PATCH"
+              {...register('method')}
+            />
+            <label htmlFor="patch">PATCH</label>
           </div>
           <div className={styles.radioWrapper}>
             <Input
