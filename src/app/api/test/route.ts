@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
 export async function PATCH(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const requestUrl = searchParams.get('url');
-  console.log(request);
+
   if (!requestUrl) {
     return NextResponse.json({ error: 'Please input endpoint' });
   }
