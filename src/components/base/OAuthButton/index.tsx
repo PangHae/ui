@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC } from 'react';
+import React, { ComponentProps, CSSProperties, FC } from 'react';
 
 import cx from 'clsx';
 
@@ -11,8 +11,10 @@ import { SocialType } from '@/types/socialType';
 import styles from './oauthButton.module.scss';
 
 interface Props extends ComponentProps<'button'> {
-  className?: string;
   companyName: SocialType;
+  className?: string;
+  width?: string;
+  height?: string;
 }
 
 const OAuthLogoMap = {
@@ -21,10 +23,26 @@ const OAuthLogoMap = {
   google: <GoogleLogo className={styles.icon} />,
 };
 
-const OAuthButton: FC<Props> = ({ className, companyName, ...rest }) => {
+const OAuthButton: FC<Props> = ({
+  className,
+  companyName,
+  width,
+  height,
+  ...rest
+}) => {
+  const style = {
+    '--width': width && width,
+    '--height': height && height,
+  } as CSSProperties;
+
   return (
     <button
-      className={cx(styles.oauthButton, styles[companyName], className)}
+      className={cx(
+        styles.oauthButton,
+        styles[companyName],
+        className && styles[className],
+      )}
+      style={style}
       {...rest}
     >
       {OAuthLogoMap[companyName]}

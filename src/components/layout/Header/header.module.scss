@@ -1,0 +1,19 @@
+@use 'constants/colors' as c;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  padding: 0 20px;
+  background-color: c.$COLOR_MAIN_4;
+
+  .logoMenu {
+    display: flex;
+    gap: 20px;
+
+    .menu {
+      list-style: none;
+    }
+  }
+}

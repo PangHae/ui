@@ -3,19 +3,33 @@
 .oauthButton {
   position: relative;
   display: flex;
+  gap: 10px;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 46px;
+  width: var(--width);
+  height: var(--height);
   color: c.$COLOR_BLACK;
   cursor: pointer;
   border-radius: 4px;
 }
 
-.icon {
-  position: absolute;
-  top: 7px;
-  left: 7px;
+// .icon {
+//   position: absolute;
+
+// }
+
+.medium {
+  width: 280px;
+  height: 50px;
+}
+
+.small {
+  width: 202px;
+  height: 50px;
+}
+
+.big {
+  width: 499px;
+  height: 50px;
 }
 
 .kakao {
