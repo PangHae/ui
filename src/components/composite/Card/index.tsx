@@ -1,6 +1,14 @@
+'use client';
+
 import { FC, PropsWithChildren } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import styles from './card.module.scss';
+
+interface Props {
+  teamId: string;
+}
 
 interface TitleProps {
   name: string;
@@ -14,8 +22,17 @@ interface CardFooterProps {
   content: string;
 }
 
-const CardMain: FC<PropsWithChildren> = ({ children }) => {
-  return <section className={styles.card}>{children}</section>;
+const CardMain: FC<PropsWithChildren<Props>> = ({ teamId, children }) => {
+  const router = useRouter();
+
+  return (
+    <section
+      className={styles.card}
+      onClick={() => router.push(`/team?teamId=${teamId}`)}
+    >
+      {children}
+    </section>
+  );
 };
 
 const Title: FC<TitleProps> = ({ name }) => {
