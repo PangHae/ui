@@ -50,7 +50,7 @@ const Home = () => {
       <section className={styles.gridContainer}>
         {data.map(({ id, name, description, memberCount }) => {
           return (
-            <Card key={`${id}`} teamId={id.toString()}>
+            <Card key={`${id}`} meetId={id.toString()}>
               <Card.Title name={name} />
               <Card.Description content={description} />
               <Card.MemberCounter content={`${memberCount}명`} />

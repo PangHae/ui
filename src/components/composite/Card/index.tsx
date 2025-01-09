@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import styles from './card.module.scss';
 
 interface Props {
-  teamId: string;
+  meetId: string;
 }
 
 interface TitleProps {
@@ -22,13 +22,13 @@ interface CardFooterProps {
   content: string;
 }
 
-const CardMain: FC<PropsWithChildren<Props>> = ({ teamId, children }) => {
+const CardMain: FC<PropsWithChildren<Props>> = ({ meetId, children }) => {
   const router = useRouter();
 
   return (
     <section
       className={styles.card}
-      onClick={() => router.push(`/team?teamId=${teamId}`)}
+      onClick={() => router.push(`/meet?meetId=${meetId}`)}
     >
       {children}
     </section>
