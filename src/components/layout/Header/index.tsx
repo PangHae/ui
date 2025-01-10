@@ -5,9 +5,9 @@ import OAuthButton from '@/components/base/OAuthButton';
 import styles from './header.module.scss';
 
 const Header = () => {
-  const handleClickOauth = async (type: 'kakao' | 'google' | 'naver') => {
+  const handleClickOauth = () => {
     window.open(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dok/api/${type}/login`,
+      `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_API_LOCAL_URL}/auth/login/callback&scope=profile_nickname, profile_image`,
       '_self',
     );
   };
@@ -24,7 +24,7 @@ const Header = () => {
         companyName="kakao"
         width="140px"
         height="36px"
-        onClick={() => handleClickOauth('kakao')}
+        onClick={handleClickOauth}
       />
     </header>
   );

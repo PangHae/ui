@@ -1,10 +1,15 @@
 import { create } from 'zustand';
 
-type User = { id: number; name: string };
+type UserStore = {
+  accessToken: string;
+  name: string;
+  setUser: (accessToken: string, name: string) => void;
+  clearUser: () => void;
+};
 
-export const useUserStore = create<User>((set) => ({
-  id: -1,
+export const useUserStore = create<UserStore>((set) => ({
+  accessToken: '',
   name: '',
-  setUser: (id: number, name: string) => set({ id, name }),
-  clearUser: () => set({ id: 0, name: '' }),
+  setUser: (accessToken: string, name: string) => set({ accessToken, name }),
+  clearUser: () => set({ accessToken: '', name: '' }),
 }));
